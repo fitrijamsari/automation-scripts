@@ -74,22 +74,19 @@ def move_corrupted_images(root_dir, output_dir):
         for filename in files:
             if filename.lower().endswith((".jpg", ".jpeg")):
                 image_path = os.path.join(root, filename)
-                xml_filename = os.path.splitext(filename)[0] + ".xml"
-                xml_path = os.path.join(root, xml_filename)
+                # xml_filename = os.path.splitext(filename)[0] + ".xml"
+                # xml_path = os.path.join(root, xml_filename)
 
                 # Check if the image is corrupted
                 if is_image_corrupted(image_path):
                     # Move the corrupted image and its XML file to the output directory
                     output_image_path = os.path.join(output_dir, filename)
-                    output_xml_path = os.path.join(output_dir, xml_filename)
+                    # output_xml_path = os.path.join(output_dir, xml_filename)
 
                     shutil.move(image_path, output_image_path)
-                    shutil.move(xml_path, output_xml_path)
+                    # shutil.move(xml_path, output_xml_path)
 
-                    print(
-                        f"Moved corrupted image: {image_path} and XML: {xml_path} to"
-                        f" {output_dir}"
-                    )
+                    print(f"Moved corrupted image: {image_path} to {output_dir}")
                 else:
                     # If the image is not corrupted, try decoding it
                     image = JPEG(image_path)
@@ -98,15 +95,12 @@ def move_corrupted_images(root_dir, output_dir):
                     except:
                         # If decoding fails, move the image and its XML file to the output directory
                         output_image_path = os.path.join(output_dir, filename)
-                        output_xml_path = os.path.join(output_dir, xml_filename)
+                        # output_xml_path = os.path.join(output_dir, xml_filename)
 
                         shutil.move(image_path, output_image_path)
-                        shutil.move(xml_path, output_xml_path)
+                        # shutil.move(xml_path, output_xml_path)
 
-                        print(
-                            f"Moved corrupted image: {image_path} and XML:"
-                            f" {xml_path} to {output_dir}"
-                        )
+                        print(f"Moved corrupted image: {image_path} to {output_dir}")
 
 
 if __name__ == "__main__":
